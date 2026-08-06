@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/product.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,13 +28,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<String> products = [];
+  List<Product> products = [];
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _productNameController = TextEditingController();
 
-  void _addProduct(String productName) {
+  void _addProduct(Product product) {
     setState(() {
-      products.add(productName);
+      products.add(product);
     });
   }
 
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Accept'),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  _addProduct(_productNameController.text);
+                  _addProduct(Product(name: _productNameController.text));
                   _productNameController.clear();
                   Navigator.of(context).pop();
                 }
@@ -110,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: products.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
-            title: Text(products[index]),
+            title: Text(products[index].name),
             trailing: IconButton(
               icon: Icon(Icons.delete),
               onPressed: () => _deleteProduct(index),
