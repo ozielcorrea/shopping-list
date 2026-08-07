@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_list/product.dart';
 import 'package:shopping_list/edit_product_dialog_custom.dart';
+import 'package:shopping_list/list_view_products_custom.dart';
+import 'package:shopping_list/product.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,18 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(products[index].name),
-            subtitle: Text((products[index].price/100).toString()),
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () => _deleteProduct(index),
-            ),
-          );
-        },
+      body: ListViewProductsCustom(
+        products: products,
+        deleteProduct: _deleteProduct,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showEditProductDialog,
