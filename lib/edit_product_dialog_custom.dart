@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/product.dart';
 
-class EditProductDialogCustom extends StatelessWidget{
+class EditProductDialogCustom extends StatefulWidget {
+  final Function(Product product) addProduct;
+
+  const EditProductDialogCustom({super.key, required this.addProduct});
+
+  @override
+  State<EditProductDialogCustom> createState() =>
+      _EditProductDialogCustomState();
+}
+
+class _EditProductDialogCustomState extends State<EditProductDialogCustom> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _productNameController = TextEditingController();
   final _productPriceController = TextEditingController();
-  final Function(Product product) addProduct;
 
-  EditProductDialogCustom({super.key, required this.addProduct});
+  @override
+  void dispose() {
+    _productNameController.dispose();
+    _productPriceController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +76,7 @@ class EditProductDialogCustom extends StatelessWidget{
           child: const Text('Accept'),
           onPressed: () {
             if (_formKey.currentState!.validate()) {
-              addProduct(
+              widget.addProduct(
                 Product(
                   name: _productNameController.text,
                   price: (double.parse(_productPriceController.text) * 100)
