@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list/product.dart';
 
-class ListViewProductsCustom extends StatelessWidget{
+class ListViewProductsCustom extends StatelessWidget {
   final List<Product> products;
   final Function(int index) deleteProduct;
 
-  const ListViewProductsCustom({super.key, required this.products, required this.deleteProduct});
+  const ListViewProductsCustom({
+    super.key,
+    required this.products,
+    required this.deleteProduct,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -48,9 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
-        return EditProductDialogCustom(
-          addProduct: _addProduct,
-        );
+        return EditProductDialogCustom(addProduct: _addProduct);
       },
     );
   }
