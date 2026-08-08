@@ -30,17 +30,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Product> products = [];
+  final List<Product> _products = [];
 
   void _addProduct(Product product) {
     setState(() {
-      products.add(product);
+      _products.add(product);
     });
   }
 
   void _deleteProduct(int index) {
     setState(() {
-      products.removeAt(index);
+      _products.removeAt(index);
     });
   }
 
@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListViewProductsCustom(
-        products: products,
+        products: _products,
         deleteProduct: _deleteProduct,
       ),
       floatingActionButton: FloatingActionButton(
